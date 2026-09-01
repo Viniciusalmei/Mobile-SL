@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflixdovini/screens/screens.detalhes.dart';
 import 'package:netflixdovini/screens/screens.novofilme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -59,10 +60,13 @@ class _TelaHomeState extends State<TelaHome> {
       children: [
         for(String filme in filmes)
           Column(children: [
-          Image.network(filme.split("|")[1],width: 100),
+          GestureDetector(
+            onTap:(){
+              Navigator.push(context,MaterialPageRoute(builder: (context)=>DetalhesFilme(filme: filme)));
+            },
+            child:Image.network(filme.split("|")[1],width: 100),
+          ),
           Text(filme.split("|")[0]),
-          Text(filme.split("|")[2]),
-          Text(filme.split("|")[3]),
           TextButton(onPressed:()=>deletarDados(filme),child:Text("Deletar"))
         ],)
       ],
