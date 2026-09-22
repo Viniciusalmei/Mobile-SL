@@ -43,7 +43,9 @@ class _TelaHomeState extends State<TelaHome> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
           Icon(Icons.list, color: Colors.white),
-          Icon(Icons.settings,color: Colors.white)
+          IconButton(onPressed:(){
+            Navigator.push(context,MaterialPageRoute(builder: (context)=>TelaGestao()));
+          },icon:Icon(Icons.settings),color: Colors.white)
         ],)
       ),
       body: listaProdutos.isEmpty ? Center(child:Text("Carregando Produtos")) :
