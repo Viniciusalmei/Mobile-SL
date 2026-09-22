@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:app_mercadinho/components/produtos.dart';
+import 'package:app_mercadinho/screens/telagestao.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,7 +47,8 @@ class _TelaHomeState extends State<TelaHome> {
           IconButton(onPressed:(){
             Navigator.push(context,MaterialPageRoute(builder: (context)=>TelaGestao()));
           },icon:Icon(Icons.settings),color: Colors.white)
-        ],)
+        ],),
+        automaticallyImplyLeading: false,
       ),
       body: listaProdutos.isEmpty ? Center(child:Text("Carregando Produtos")) :
       GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
