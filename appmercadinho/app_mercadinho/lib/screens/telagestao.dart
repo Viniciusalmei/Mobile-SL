@@ -15,6 +15,12 @@ class _TelaGestaoState extends State<TelaGestao> {
   TextEditingController nomeDigitado = TextEditingController(); 
   TextEditingController urlDigitada = TextEditingController();
   TextEditingController precoDigitado = TextEditingController();
+
+  @override 
+  void initState(){
+    super.initState();
+    fazerGet();
+  }
   
   void fazerPost() async {
     final respostaServidor = await http.post(Uri.parse("https://mercadinho-api-hhi8.onrender.com/produtos"),
@@ -66,13 +72,18 @@ class _TelaGestaoState extends State<TelaGestao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(title:Text("Tela Gestão"),backgroundColor: Colors.orange),
+      
       body:ListView(
         children: [
           TextField(controller:nomeDigitado, decoration: InputDecoration(hintText: "Digite o nome do produto"),),
           TextField(controller:urlDigitada, decoration: InputDecoration(hintText: "Digite a url da imagem"),),
           TextField(controller:precoDigitado, decoration: InputDecoration(hintText: "Digite o preco do Produto"),),
           TextButton(onPressed: ()=>fazerPost(), child: Text("Salvar")),
+          for(dynamic produto in listaProdutos)
+          ListTile(
+            title:Text(produto["nome"]),
+            trailing: IconButton(onPressed: ()=>fazerDelete(produto["id"]), icon: Icon(Icons.delete)),
+          )
         ],
       )
 
