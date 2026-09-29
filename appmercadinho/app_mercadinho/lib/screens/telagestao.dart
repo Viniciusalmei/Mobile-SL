@@ -37,8 +37,31 @@ class _TelaGestaoState extends State<TelaGestao> {
       );
     }
     }
-  
   }
+
+  List listaProdutos = [];
+  void fazerGet() async {
+    final respostaServidor = await http.get(Uri.parse("https://mercadinho-api-hhi8.onrender.com/produtos"));
+    if(respostaServidor.statusCode == 200){
+      final dados = jsonDecode(respostaServidor.body);
+      setState(() {
+        listaProdutos = dados;
+      });
+    }
+  }
+
+  void fazerDelete(dynamic id) async {
+    final respostaServidor = await http.delete(Uri.parse("https://mercadinho-api-hhi8.onrender.com/produtos/$id"));
+    if(mounted){
+      if(respostaServidor.statusCode == 200){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Item deletado com sucesso")));
+        fazerGet();
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Erro ao deletar Item")));
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +72,7 @@ class _TelaGestaoState extends State<TelaGestao> {
           TextField(controller:nomeDigitado, decoration: InputDecoration(hintText: "Digite o nome do produto"),),
           TextField(controller:urlDigitada, decoration: InputDecoration(hintText: "Digite a url da imagem"),),
           TextField(controller:precoDigitado, decoration: InputDecoration(hintText: "Digite o preco do Produto"),),
-          TextButton(onPressed: ()=>fazerPost(), child: Text("Salvar"))
+          TextButton(onPressed: ()=>fazerPost(), child: Text("Salvar")),
         ],
       )
 
