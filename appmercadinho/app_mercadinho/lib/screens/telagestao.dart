@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_mercadinho/components/minhaappbar.dart';
 import 'package:app_mercadinho/navigation/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -72,7 +73,7 @@ class _TelaGestaoState extends State<TelaGestao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: MinhaAppBar(),
       body:ListView(
         children: [
           TextField(controller:nomeDigitado, decoration: InputDecoration(hintText: "Digite o nome do produto"),),
