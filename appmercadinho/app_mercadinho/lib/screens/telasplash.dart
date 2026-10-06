@@ -1,5 +1,6 @@
 import 'package:app_mercadinho/navigation/navbar.dart';
 import 'package:app_mercadinho/screens/telahome.dart';
+import 'package:app_mercadinho/screens/telalogin.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(
       Duration(seconds:3),
-      ()=> Navigator.push(context,MaterialPageRoute(builder: (context)=>NavBar()))
+      ()=> Navigator.push(context,MaterialPageRoute(builder: (context)=>TelaLogin()))
     );
   }
 
